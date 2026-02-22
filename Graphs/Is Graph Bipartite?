@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool dfs(int i, int parent, vector<vector<int>>&graph,vector<int>& node, int color){
+        if(node[i]!=-1){
+            if(node[i]!=color){
+                return false;
+            }else 
+                return true;
+        }
+        node[i]=color;
+        bool ans=true;
+        for(auto it:graph[i]){
+            if(it!=parent){
+                ans&=dfs(it, parent, graph, node, (color+1)%2);
+            }
+        }
+        return ans;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        vector<int> node(graph.size(),-1);
+        int ans=true;
+        for(int i=0;i<graph.size();i++){
+            if(node[i]==-1)
+                ans&=dfs(i, -1, graph, node, 0);
+        }
+        return ans;
+    }
+};
