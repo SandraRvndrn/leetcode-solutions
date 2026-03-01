@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int dfs(int node, int n, vector<int>& dp) {
+        if (node == n) 
+            return 1;
+        
+        if (node > n) 
+            return 0;
+
+        if (dp[node] != -1)
+            return dp[node];
+
+        return dp[node] = 
+               dfs(node + 1, n, dp) +
+               dfs(node + 2, n, dp);
+    }
+
+    int climbStairs(int n) {
+        vector<int> dp(n + 1, -1);
+        return dfs(0, n, dp);
+    }
+};
