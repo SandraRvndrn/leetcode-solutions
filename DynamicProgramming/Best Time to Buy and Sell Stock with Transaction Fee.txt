@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int hold = -prices[0]; // holding a stock
+        int cash = 0;          // not holding
+
+        for (int i = 1; i < prices.size(); i++) {
+            hold = max(hold, cash - prices[i]);           // buy or keep holding
+            cash = max(cash, hold + prices[i] - fee);     // sell or stay idle
+        }
+
+        return cash;
+    }
+};
